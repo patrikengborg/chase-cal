@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+
+@theme inline {
+	--color-neutral: oklch(1 0 0);
+	--color-main: var(--color-slate-700);
+	--color-accent: var(--color-teal-600);
+	--color-warning: var(--color-red-500);
+}
+
+@layer base {
+	:root {
+		font-size: 20px;
+		--easing-default: cubic-bezier(0.78, 0, 0.22, 1);
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.animate-fade-in {
+		animation: fade-in 0.5s ease-(--easing-default);
+	}
+
+	body {
+		@apply min-h-dvh text-main antialiased;
+		letter-spacing: -0.01rem;
+		background-color: oklch(from var(--color-main) l c h / 0.05);
+	}
+
+	button:disabled {
+		@apply cursor-not-allowed opacity-50;
+	}
+
+	strong {
+		@apply font-medium;
+	}
+
+	label {
+		@apply grid gap-0.5;
+
+		> span {
+			@apply text-xs font-medium;
+		}
+	}
+
+	input {
+		@apply w-full rounded-sm border border-main/10 bg-main/5 p-2 text-sm leading-none transition-colors duration-200 ease-(--easing-default) outline-none;
+
+		&:focus-visible {
+			@apply border-accent/50;
+		}
+	}
+}
+
+@layer components {
+	.card {
+		@apply rounded-lg border border-main/15 bg-neutral p-4;
+	}
+
+	.starting-fade-in {
+		@apply transition-opacity duration-300 ease-(--easing-default) starting:opacity-0;
+	}
+}
