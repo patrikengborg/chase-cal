@@ -8,9 +8,10 @@
 		slots: { start: string; end: string }[]
 		selectedTime: string | null
 		class?: string
+		onSelect: () => void
 	}
 
-	let { date, slots, selectedTime = $bindable(), class: classes }: Props = $props()
+	let { date, slots, selectedTime = $bindable(), class: classes, onSelect }: Props = $props()
 
 	function getHalfHourSlots(startHour: number, endHour: number) {
 		const slots = []
@@ -63,6 +64,7 @@
 							label={`${hour}:${minute}`}
 							onclick={() => {
 								selectedTime = isSelected ? null : datetime
+								onSelect()
 							}}
 						/>
 					</li>

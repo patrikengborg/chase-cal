@@ -12,6 +12,12 @@
 		class?: string
 	}
 
+	export function reset() {
+		success = false
+		isSubmitting = false
+		errorMsg = ''
+	}
+
 	let { selectedDate, selectedTime, class: classes }: Props = $props()
 
 	let success = $state(false)
@@ -69,14 +75,14 @@
 					isSubmitting = false
 				}
 			})}
-			class="grid grid-rows-[auto_auto_auto_1fr] gap-2"
+			class="grid gap-2"
 		>
 			<header>
 				{#if selectedDate}
 					<h2 class="mb-4 text-center text-sm font-medium">Book your call</h2>
 				{/if}
 
-				<p class="mb-4 rounded-sm border border-accent/20 bg-accent/10 p-2 text-center text-xs">
+				<p class="rounded-sm border border-accent/20 bg-accent/10 p-2 text-center text-xs">
 					&nbsp;
 					{#if formattedDate}
 						<strong>Your slot:</strong>
@@ -101,7 +107,7 @@
 				<input {...bookSlot.fields.email.as('email')} required />
 			</label>
 
-			<div class="mt-auto">
+			<div class="mt-4">
 				<input type="hidden" name="start" value={start} />
 				<input type="hidden" name="end" value={end} />
 

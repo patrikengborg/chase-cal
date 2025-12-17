@@ -7,9 +7,10 @@
 		selectedDate: string | null // ISO date
 		datesWithSlots: Set<string>
 		class?: string
+		onSelect: () => void
 	}
 
-	let { selectedDate = $bindable(), datesWithSlots, class: classes }: Props = $props()
+	let { selectedDate = $bindable(), datesWithSlots, class: classes, onSelect }: Props = $props()
 
 	const year = 2025
 	const month = new Date().getMonth()
@@ -23,7 +24,7 @@
 		<h2 class="col-span-7 mb-2 text-center font-medium">{monthTitle}</h2>
 
 		{#each weekdays as weekday}
-			<div class="px-1.5 py-3 text-center text-xs font-medium uppercase">{weekday}</div>
+			<div class="px-1.5 py-3 pb-1 text-center text-xs font-medium uppercase">{weekday}</div>
 		{/each}
 	</header>
 
@@ -41,6 +42,7 @@
 						label={day.label}
 						onclick={() => {
 							selectedDate = isSelected ? null : isoDate
+							onSelect()
 						}}
 					/>
 				{/if}

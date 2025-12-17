@@ -8,6 +8,8 @@
 	let selectedDate = $state<string | null>(null)
 	let selectedTime = $state<string | null>(null)
 
+	let bookingForm = $state<BookingForm>()
+
 	const datesWithSlots = $derived.by(() => {
 		return new Set(data.slots.map((slot) => slot.start.slice(0, 10)))
 	})
@@ -20,30 +22,41 @@
 </script>
 
 <div class="grid min-h-dvh grid-rows-[auto_1fr] place-items-center">
-	<header class="py-6">
+	<header class="py-5">
 		<h1 class="text-center text-xl font-medium">Acme Booking Calendar</h1>
 	</header>
 
-	<main>
+	<main class="p-5">
 		<div
 			class={[
-				'grid grid-cols-[1fr_1fr] gap-4 transition-all duration-500 ease-(--easing-default)',
-				hasSelectedDateAndTime ? '-translate-x-40' : 'translate-x-0'
+				'grid gap-4 transition-all duration-500 ease-(--easing-default) lg:grid-cols-[1fr_1fr]',
+				hasSelectedDateAndTime ? 'lg:-translate-x-40' : 'lg:translate-x-0'
 			]}
 		>
-			<Calendar class="relative z-10 col-start-1 row-start-1" bind:selectedDate {datesWithSlots} />
+			<Calendar
+				class="relative z-10 col-start-1 row-start-1"
+				bind:selectedDate
+				{datesWithSlots}
+				onSelect={() => {
+					bookingForm?.reset()
+				}}
+			/>
 
 			<Slots
-				class="relative z-10 col-start-2 row-start-1"
+				class="relative z-10 lg:col-start-2 lg:row-start-1"
 				date={selectedDate}
 				slots={selectedDateSlots}
 				bind:selectedTime
+				onSelect={() => {
+					bookingForm?.reset()
+				}}
 			/>
 
 			<BookingForm
+				bind:this={bookingForm}
 				{selectedDate}
 				{selectedTime}
-				class={`col-start-2 row-start-1 transition-transform duration-500 ease-(--easing-default) ${hasSelectedDateAndTime ? `translate-x-[calc(100%+1rem)]` : `translate-x-0`}`}
+				class={`transition-transform duration-500 ease-(--easing-default) lg:col-start-2 lg:row-start-1 ${hasSelectedDateAndTime ? `grid lg:translate-x-[calc(100%+1rem)]` : `hidden lg:grid lg:translate-x-0`}`}
 			/>
 		</div>
 	</main>
