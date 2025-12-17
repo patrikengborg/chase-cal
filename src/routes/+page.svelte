@@ -21,7 +21,7 @@
 
 <div class="grid min-h-dvh grid-rows-[auto_1fr] place-items-center">
 	<header class="py-6">
-		<h1 class="text-center text-xl font-medium">Acme booking calendar</h1>
+		<h1 class="text-center text-xl font-medium">Acme Booking Calendar</h1>
 	</header>
 
 	<main>

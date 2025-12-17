@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Acme booking calendar</title>
+	<title>Acme Booking Calendar</title>
 	<link rel="icon" href="https://fav.farm/📅" />
 </svelte:head>
 

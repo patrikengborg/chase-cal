@@ -16,7 +16,6 @@
 	const todayIsoUTC = new Date().toISOString().slice(0, 10)
 
 	const { monthTitle, weekdays, daysInMonth } = buildCalendarMonth(year, month)
-	$inspect(daysInMonth)
 </script>
 
 <div class={twMerge('card grid grid-cols-7 gap-1 text-sm', classes)}>

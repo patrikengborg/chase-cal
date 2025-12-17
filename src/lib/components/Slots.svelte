@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils/formatDate'
+	import { formatDate, zonedDateTimeToUtcMs } from '$lib/utils/dateFormatting'
 	import SelectButton from './SelectButton.svelte'
 	import { twMerge } from 'tailwind-merge'
 
@@ -20,48 +20,6 @@
 			slots.push({ hour, minute: '30' })
 		}
 		return slots
-	}
-
-	function getTimeZoneOffsetMinutes(date: Date, timeZone: string) {
-		// offset = (time in tz) - (time in UTC), in minutes, for this instant
-		const dtf = new Intl.DateTimeFormat('en-US', {
-			timeZone,
-			hour12: false,
-			year: 'numeric',
-			month: '2-digit',
-			day: '2-digit',
-			hour: '2-digit',
-			minute: '2-digit',
-			second: '2-digit'
-		})
-
-		const parts = dtf.formatToParts(date)
-		const get = (t: string) => Number(parts.find((p) => p.type === t)?.value)
-
-		const asUTC = Date.UTC(
-			get('year'),
-			get('month') - 1,
-			get('day'),
-			get('hour'),
-			get('minute'),
-			get('second')
-		)
-
-		return (asUTC - date.getTime()) / 60000
-	}
-
-	function zonedDateTimeToUtcMs(isoDate: string, timeHHMM: string, timeZone: string) {
-		const [Y, M, D] = isoDate.split('-').map(Number)
-		const [h, m] = timeHHMM.split(':').map(Number)
-
-		// Start with a naive UTC guess for the same wall time
-		const guessUtc = new Date(Date.UTC(Y, M - 1, D, h, m, 0))
-
-		// Compute the offset of that instant in the target timezone
-		const offsetMin = getTimeZoneOffsetMinutes(guessUtc, timeZone)
-
-		// Correct the guess: wall time in TZ -> UTC
-		return guessUtc.getTime() - offsetMin * 60000
 	}
 
 	function isAvailableAt(

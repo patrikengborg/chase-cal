@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { HttpError } from '@sveltejs/kit'
 
-	import { formatDate } from '$lib/utils/formatDate'
+	import { formatDate } from '$lib/utils/dateFormatting'
 	import { twMerge } from 'tailwind-merge'
 	import { bookSlot } from '$lib/remote/bookSlot.remote'
-	import { toIsoFromLocal } from '$lib/utils/toIsoFromLocal'
+	import { toIsoFromLocal } from '$lib/utils/dateFormatting'
 
 	interface Props {
 		selectedDate: string | null
