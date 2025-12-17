@@ -93,17 +93,12 @@
 
 			<label>
 				<span>Full name</span>
-				<input
-					{...bookSlot.fields.name.as('text')}
-					bind:this={nameInput}
-					value="Patrik Engborg"
-					required
-				/>
+				<input {...bookSlot.fields.name.as('text')} bind:this={nameInput} required />
 			</label>
 
 			<label>
 				<span>Email</span>
-				<input {...bookSlot.fields.email.as('email')} value="patrik@engborg.nu" required />
+				<input {...bookSlot.fields.email.as('email')} required />
 			</label>
 
 			<div class="mt-auto">
