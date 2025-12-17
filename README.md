@@ -1,38 +1,39 @@
-# sv
+# Acme Booking Calendar
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Run locally
 
-## Creating a project
+Make sure you have Bun installed (NPM should work as well).
 
-If you're seeing this, you've probably already done this step. Congrats!
+In your terminal, run:
 
-```sh
-# create a new project in the current directory
-npx sv create
+- `bun install`
+- `bun dev`
 
-# create a new project in my-app
-npx sv create my-app
-```
+Then open a browser and go to: [http://localhost:5173/](http://localhost:5173/)
 
-## Developing
+Live demo: [https://acme-cal.vercel.app/](https://acme-cal.vercel.app/)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Design decisions and trade-offs
 
-```sh
-npm run dev
+Dates and time are always a bit tricky. To keep the solution lean, I avoided third-party date libraries and relied on the native Date object together with Intl.DateTimeFormat for formatting and localization. Temporal would have been a great fit, but it’s not really available in browsers yet.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+For the calendar grid, I started with a `<table>`, which feels semantically correct. But I ended up using a div-based layout instead due to the time constraints. With more time I would revisit this for improved semantics and accessibility.
 
-## Building
+Regarding the UI, I aimed for a clean, usable interface over visual complexity.
 
-To create a production version of your app:
+It's straightforward to tweak the colors and even get dark mode almost for free - thanks to the design tokens in the @theme block. Size is also easy to change with the `--font-size-base` property.
 
-```sh
-npm run build
-```
+I also like to work with subtle transitions to communicate UI changes and to make the experience feel smooth. Would have loved to spend a bit more time on that.
 
-You can preview the production build with `npm run preview`.
+## Improvements with more time
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- Month navigation, the current calendar only supports the current month.
+- Centralized state, and less props between components.
+- Improved semantics and accessability for the calendar
+- More thorough testing for UTC and timezone support
+- Component extraction for common UI elements (buttons, inputs, etc.). Maybe also break up the main components into smaller pieces.
+- Dark mode
+- Improved form validation
+- More robust error handling and API client
+- Automated tests
+- Mobile refinements and additional UI polish
