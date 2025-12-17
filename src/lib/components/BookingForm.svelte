@@ -79,7 +79,7 @@
 		>
 			<header>
 				{#if selectedDate}
-					<h2 class="mb-4 text-center text-sm font-medium">Book your call</h2>
+					<h2 class="mb-4 text-center text-sm font-medium">Book your meeting</h2>
 				{/if}
 
 				<p class="rounded-sm border border-accent/20 bg-accent/10 p-2 text-center text-xs">
@@ -116,7 +116,7 @@
 					type="submit"
 					class=" w-full cursor-pointer rounded-sm bg-accent px-4 py-2 text-sm font-medium text-neutral hover:bg-accent/90"
 				>
-					Book your slot
+					Book meeting
 				</button>
 			</div>
 		</form>
