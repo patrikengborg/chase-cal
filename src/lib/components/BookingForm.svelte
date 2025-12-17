@@ -36,7 +36,7 @@
 
 	const formattedDate = $derived.by(() => {
 		if (!selectedDate || !selectedTime) return null
-		return `${formatDate(selectedDate)}, ${selectedTime}`
+		return `${formatDate(selectedDate)}, <span class="tabular-nums">${selectedTime}</span>`
 	})
 
 	const start = $derived.by(() => {
@@ -56,7 +56,7 @@
 	{#if success}
 		<p class="starting-fade-in my-auto text-center text-sm leading-loose">
 			Your slot has been successfully booked at<br />
-			<strong>{formattedDate}</strong><br />
+			<strong>{@html formattedDate}</strong><br />
 			Thank you and see you there 👋
 		</p>
 	{:else}
@@ -86,7 +86,7 @@
 					&nbsp;
 					{#if formattedDate}
 						<strong>Your slot:</strong>
-						{formattedDate}
+						{@html formattedDate}
 					{/if}
 				</p>
 
